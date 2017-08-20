@@ -1,0 +1,3 @@
+/home/charles/Repo/face-align3000/build/CMakeFiles/edit_cache.dir
+/home/charles/Repo/face-align3000/build/CMakeFiles/rebuild_cache.dir
+/home/charles/Repo/face-align3000/build/CMakeFiles/AlignCrop.dir

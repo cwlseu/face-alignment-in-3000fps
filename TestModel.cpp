@@ -9,14 +9,14 @@
 using namespace std;
 using namespace cv;
 
-double TestModel (vector<string> testDataName){
+double TestModel (vector<string> testDataName) {
     vector<Mat_<uchar> > test_images;
     vector<BoundingBox> test_bounding_boxs;
     vector<Mat_<double> >test_ground_truth_shapes;
     int initial_number = 1;
-    for(int i=0;i<testDataName.size();i++){
+    for (int i = 0; i < testDataName.size(); i++) {
         string path;
-        if(testDataName[i]=="helen"||testDataName[i]=="lfpw")
+        if (testDataName[i] == "helen" || testDataName[i] == "lfpw")
             path = dataPath + testDataName[i] + "/testset/Path_Images.txt";
         else
             path = dataPath + testDataName[i] + "/Path_Images.txt";
@@ -24,21 +24,21 @@ double TestModel (vector<string> testDataName){
         LoadOpencvBbxData(path, test_images, test_ground_truth_shapes, test_bounding_boxs);
     }
 //    LoadCofwTestData(test_images, test_ground_truth_shapes, test_bounding_boxs);
-    
-    
+
+
     LBFRegressor regressor;
-    regressor.Load(modelPath+"LBF.model");
-    double t1 =(double)cvGetTickCount();
-    vector<Mat_<double> > current_shapes = regressor.Predict(test_images,test_bounding_boxs,
-                                                             test_ground_truth_shapes,initial_number);
+    regressor.Load(modelPath + "LBF.model");
+    double t1 = (double)cvGetTickCount();
+    vector<Mat_<double> > current_shapes = regressor.Predict(test_images, test_bounding_boxs,
+                                           test_ground_truth_shapes, initial_number);
     //vector<Mat_<double> >current_shapes = test_ground_truth_shapes;
-    double t2 =(double)cvGetTickCount();
-    
-    cout << "test data size: "<<current_shapes.size()<<endl;
-    cout << " average predict time is "<<(t2-t1)/((double)cvGetTickFrequency()*1000*current_shapes.size())<<" ms"<<endl;
-    
+    double t2 = (double)cvGetTickCount();
+
+    cout << "test data size: " << current_shapes.size() << endl;
+    cout << " average predict time is " << (t2 - t1) / ((double)cvGetTickFrequency() * 1000 * current_shapes.size()) << " ms" << endl;
+
     double MRSE_sum = 0;
-    for (int i =0; i<current_shapes.size();i++){
+    for (int i = 0; i < current_shapes.size(); i++) {
         MRSE_sum += CalculateError(test_ground_truth_shapes[i], current_shapes[i]);
 //        // draw bounding box
 //        rectangle(test_images[i], cvPoint(test_bounding_boxs[i].start_x,test_bounding_boxs[i].start_y),
@@ -52,11 +52,11 @@ double TestModel (vector<string> testDataName){
 //        if(a=='s'){
 //            imwrite(to_string(i)+".jpg",test_images[i]);
 //        }
-        
-        
+
+
     }
-    cout << "Mean Root Square Error is "<< MRSE_sum/current_shapes.size()*100 <<"%"<<endl;
-    return MRSE_sum/current_shapes.size();
+    cout << "Mean Root Square Error is " << MRSE_sum / current_shapes.size() * 100 << "%" << endl;
+    return MRSE_sum / current_shapes.size();
 }
 
 

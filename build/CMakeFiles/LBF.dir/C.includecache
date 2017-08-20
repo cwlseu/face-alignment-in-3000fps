@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/charles/Repo/face-align3000/liblinear/blas/blas.h
+blasp.h
+/home/charles/Repo/face-align3000/liblinear/blas/blasp.h
+
+/home/charles/Repo/face-align3000/liblinear/blas/blasp.h
+
+/home/charles/Repo/face-align3000/liblinear/blas/daxpy.c
+blas.h
+/home/charles/Repo/face-align3000/liblinear/blas/blas.h
+
+/home/charles/Repo/face-align3000/liblinear/blas/ddot.c
+blas.h
+/home/charles/Repo/face-align3000/liblinear/blas/blas.h
+
+/home/charles/Repo/face-align3000/liblinear/blas/dnrm2.c
+math.h
+-
+blas.h
+/home/charles/Repo/face-align3000/liblinear/blas/blas.h
+
+/home/charles/Repo/face-align3000/liblinear/blas/dscal.c
+blas.h
+/home/charles/Repo/face-align3000/liblinear/blas/blas.h
+

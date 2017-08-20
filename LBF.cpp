@@ -15,32 +15,16 @@ using namespace cv;
 Params global_params;
 
 
-string modelPath ="./../../model_69/";
-string dataPath = "./../../Datasets/";
+string modelPath ="./model/";
+string dataPath = "./Datasets/";
 string cascadeName = "haarcascade_frontalface_alt.xml";
 
 void InitializeGlobalParam();
 void PrintHelp();
 
-int main( int argc, const char** argv ){
-//    double rs[3] = {0.4,0.15,0.08};
-//    for (int i=0;i<3;i++){
-//        Mat image = imread("/Users/lequan/workspace/LBF/Datasets/afw/437595409_1.jpg");
-//        string name1("/Users/lequan/workspace/LBF/Datasets/afw/437595409_1.pts");
-//        InitializeGlobalParam();
-//        Mat_<double> ground_truth_shape = LoadGroundTruthShape(name1);
-//        BoundingBox bbx = CalculateBoundingBox(ground_truth_shape);
-//        double r = rs[i]*bbx.height/2.0;
-//        int a[13]={18,22,37,40,23,27,43,46,31,49,55,52,58};
-//        for(int j = 0;j <13;j++){
-//            cout <<j<<endl;
-//            circle(image,Point2d(ground_truth_shape(a[j]-1,0),ground_truth_shape(a[j]-1,1)),r,Scalar(255,255,255),2,8,0);
-//        }
-//        imshow("result", image);
-//        waitKey(0);
-//        string name = "radius" + to_string(i)+".jpg";
-//        imwrite(name,image);
-//    }
+
+int main( int argc, const char** argv )
+{
     //initialize parameters
     if (argc > 1 && strcmp(argv[1],"TrainModel")==0){
         InitializeGlobalParam();
@@ -127,10 +111,37 @@ void ReadGlobalParamFromFile(string path){
 }
 void PrintHelp(){
     cout << "Useage:"<<endl;
-    cout << "1. train your own model:    LBF.out  TrainModel "<<endl;
-    cout << "2. test model on dataset:   LBF.out  TestModel"<<endl;
-    cout << "3. test model via a camera: LBF.out  Demo "<<endl;
-    cout << "4. test model on a pic:     LBF.out  Demo xx.jpg"<<endl;
-    cout << "5. test model on pic set:   LBF.out  Demo Img_Path.txt"<<endl;
+    cout << "1. train your own model:    LBF  TrainModel "<<endl;
+    cout << "2. test model on dataset:   LBF  TestModel"<<endl;
+    cout << "3. test model via a camera: LBF  Demo "<<endl;
+    cout << "4. test model on a pic:     LBF  Demo xx.jpg"<<endl;
+    cout << "5. test model on pic set:   LBF  Demo Img_Path.txt"<<endl;
     cout << endl;
+}
+
+void test_()
+{   
+    double rs[3] = {0.4,0.15,0.08};
+    for (int i = 0; i < 3; i++)
+    {
+        Mat image = imread("./img/1.jpg");
+        string name1("1.pts");
+        InitializeGlobalParam();
+        Mat_<double> ground_truth_shape = LoadGroundTruthShape(name1);
+        BoundingBox bbx = CalculateBoundingBox(ground_truth_shape);
+    
+        double r = rs[i]*bbx.height/2.0;
+
+        int a[13]={18,22,37,40,23,27,43,46,31,49,55,52,58};
+    
+        for(int j = 0; j <13; j++)
+        {
+           std::cout << j << std::endl;
+           circle(image, Point2d(ground_truth_shape(a[j]-1,0), ground_truth_shape(a[j]-1,1)), r, Scalar(255,255,255), 2, 8, 0);
+        }
+        // imshow("result", image);
+        // waitKey(0);
+        string name = "radius" + to_string(i)+".jpg";
+        imwrite(name, image);
+    }
 }
